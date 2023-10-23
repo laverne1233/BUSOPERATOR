@@ -25,7 +25,17 @@ main{
     font-size: 1.75rem;
 }
 
+.logout_link_text{
+    display: none; /* Hide by default */
+    align-items: center;
+}
 
+.logout-text{
+    margin-left: 23px; /* Add a margin between the icon and the text */
+    font-size: 13px;
+    vertical-align: top;
+    line-height: 0.1px;
+}
 
 .top_section{
     
@@ -59,6 +69,7 @@ main{
 
 .icon, .link_text{
     font-size: 13px;
+    
 }
 
 .link:hover {
@@ -125,6 +136,10 @@ main{
     display: flex;
     align-items: center;
     margin-top: 20px;
+    width: 800px;
+
+    
+    
 }
 
 .search-bar input {
@@ -135,16 +150,44 @@ main{
     margin-top: 20px;
 }
 
-.search-icon {
+.search-bar2 {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 1125px;
+
+    
+    
+}
+
+.search-bar2 input {
     padding: 10px;
-    background-color: #007bff;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    flex: 1;
+    margin-top: 20px;
+}
+.search-icon {
+    margin-right:-323px;
+    padding: 10px;
+    background-color: #8b819a;
     color: #fff;
-    border: 1px solid #007bff;
+    border: 1px solid #8b819a;
     border-radius: 0 5px 5px 0;
     display: flex;
     align-items: center;
     cursor: pointer;
     margin-top: 20px;
+}
+.add-schedule-button {
+    background-color: #8b819a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 100px; 
+    right: 0px;
 }
 
 .bus-image {
@@ -252,6 +295,9 @@ main{
     color: #666;
 }
 
+.job-button{
+    margin-top: -35px;
+}
 
 
 .image-box {
@@ -277,7 +323,7 @@ main{
 }
 
 .active-button {
-    color: #8b819a;
+    color: white;
     text-decoration: underline; 
 }
 
@@ -295,7 +341,7 @@ main{
 .share-now-container {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: -30px;
 }
 
 .share-now-button {
@@ -409,7 +455,7 @@ main{
 .update-button-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: -20px;
 }
 
 .update-button {
@@ -426,6 +472,135 @@ main{
     background-color: #ccc;
 }
 
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-image {
+    width: 500px; /* Adjust the width as needed */
+    height: 630px;
+    display: block;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .LOGO-image {
+    width: 50px; 
+    height: auto; 
+    margin-bottom: 10px; 
+  }
+  
+  
+  .login-form {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    margin-right: 100px;
+  }
+  
+  .login-form h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+  
+  .login-form p {
+    color: #666;
+    margin-bottom:30px;
+  }
+  
+  .input-container {
+    margin: 20px 0;
+  }
+  
+  .input-container input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .forgot-password {
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 235px;
+    margin-top: 0px;
+    right: 165px;
+    font-size: 12px; /* Adjust the font size as needed */
+    color: black;
+  }
+  
+  .forgot-password button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    
+  }
+  
+  button {
+    margin-top: 30px;
+    width: 323px;
+    padding: 10px;
+    background-color: #8b819a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+
+  .smaller-font {
+    font-size: 10px; 
+  }
+
+  .already {
+    margin-top: 20px;
+  }
+  
+  .signup p {
+    margin-top: -30px;
+    color: #666;
+  }
+  
+  .signup button {
+    margin-left: 0px;
+    width:70px;
+    background: none;
+    border: none;
+    color: #4dcd32;
+    cursor: pointer;
+  }
+  .orlines{
+    padding-top: -200px;
+  }
+  .image-button {
+    gap: 10px; /* Adjust the gap as needed */
+    margin-top: 0px; /* Add some top margin for spacing */
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .image-button img {
+    width: 100%; /* Ensure the image covers the button */
+  }
+  
 
 .logout-container {
     position: absolute;
@@ -456,6 +631,7 @@ main{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width:100px;
 }
 
 .logout-button {
@@ -467,5 +643,4 @@ main{
     background-color: #ccc;
     color: #333;
 }
-
 

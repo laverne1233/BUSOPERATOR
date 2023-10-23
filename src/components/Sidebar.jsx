@@ -19,7 +19,7 @@ const Sidebar = ({children}) => {
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/",
+            path:"/dashboard",
             name:"Dashboard",
             icon:<FaTh/>
         },
@@ -101,8 +101,8 @@ const Sidebar = ({children}) => {
                             <div className="icon">
                                 <FaSignOutAlt />
                             </div>
-                            <div style={{ display: isOpen ? "block" : "none" }} className="link_text">
-                                Log Out
+                            <div style={{ display: isOpen ? "flex" : "none" }} className="logout_link_text">
+                                <span className="logout-text">Log Out</span>
                             </div>
                         </div>
                     </NavLink>

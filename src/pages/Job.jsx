@@ -19,8 +19,8 @@ const Form = () => {
     return (
         <div>
             <div className="bus-heading-container">
-                <p className="bus-heading">Manage Bus</p>
-                <p className="bus-heading2">Add bus and their routes</p>
+                <p className="bus-heading">Manage Job</p>
+                <p className="bus-heading2">Post your job openings</p>
             </div>
 
             <div className="form-container">
@@ -53,13 +53,13 @@ const Form = () => {
                     </div>
                 </div>
             </div>
-            <div className="button-container">
+            <div className="job-button">
                         <button className={showJobDescriptionForm ? 'active-button' : 'inactive-button'} onClick={toggleJobDescriptionForm}>Job Description</button>
                         <button className={showAboutCompanyForm ? 'active-button' : 'inactive-button'} onClick={toggleAboutCompanyForm}>About the Company</button>
              </div>
 
             {showJobDescriptionForm && (
-                <div className="form-container" style={{ marginTop: '30px' }}>
+                <div className="job-form-container" style={{ marginTop: '30px' }}>
                     <div className="form-left">
                         <form>
                             <div className="form-row2">

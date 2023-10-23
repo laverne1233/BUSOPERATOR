@@ -8,11 +8,12 @@ const BusSchedule = () => {
             <p className="bus-heading">Bus Schedule</p>
             <p className="bus-heading2">Set the bus schedule</p>
             
-            <div className="search-bar">
+            <div className="search-bar2">
                 <input type="text" placeholder="Search" />
                 <div className="search-icon">
                     <FaSearch />
                 </div>
+                <button className="add-schedule-button">Add new schedule +</button>
             </div>
             <div className="bus-image">
                 <img src={busImage} alt="Bus" />

@@ -2,17 +2,27 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import accountVerificationImage from './assets/accountVerificationImage.png'; 
 import managePeopleImage from './assets/managePeopleImage.png'; 
+import staffStatus from './assets/staffStatus.png'; 
 
 const People = () => {
-    const [showAccountVerification, setShowAccountVerification] = useState(true); // Set to true
+    const [showStaffStatus, setShowStaffStatus] = useState(true); // Set to true
+    const [showAccountVerification, setShowAccountVerification] = useState(false); // Set to false
     const [showManageStaff, setShowManageStaff] = useState(false); // Set to false
 
+    const toggleStaffStatus = () => {
+        setShowStaffStatus(true);
+        setShowAccountVerification(false);
+        setShowManageStaff(false);
+    };
+
     const toggleAccountVerification = () => {
+        setShowStaffStatus(false);
         setShowAccountVerification(true);
         setShowManageStaff(false);
     };
 
     const toggleManageStaff = () => {
+        setShowStaffStatus(false);
         setShowAccountVerification(false);
         setShowManageStaff(true);
     };
@@ -30,25 +40,39 @@ const People = () => {
             </div>
             <div className="button-container">
                 <button
-                    className={showAccountVerification ? 'active-button' : 'inactive-button'}
-                    onClick={toggleAccountVerification}
+                    className={showStaffStatus ? 'active-button' : 'inactive-button'}
+                    onClick={toggleStaffStatus}
                 >
-                    Account Verification
+                    Staff's Status
                 </button>
                 <button
                     className={showManageStaff ? 'active-button' : 'inactive-button'}
                     onClick={toggleManageStaff}
                 >
-                    Manage Staff
+                    Staff
+                </button>
+                <button
+                    className={showAccountVerification ? 'active-button' : 'inactive-button'}
+                    onClick={toggleAccountVerification}
+                >
+                    Account Verification
                 </button>
             </div>
             <div className="image-container">
+                {showStaffStatus && <img src={staffStatus} alt="Staff's Status" className="image" />}
                 {showAccountVerification && <img src={accountVerificationImage} alt="Account Verification" className="image" />}
-                {showManageStaff && <img src={managePeopleImage} alt="Manage Staff" className="image"/>}
+                {showManageStaff && (
+                    <div className="image-button-container">
+                        <button className="add-new-bus-button">Add new staff +</button>
+                        <img src={managePeopleImage} alt="Manage Staff" className="image" />
+                    </div>
+                )}
             </div>
         </div>
     );
 };
 
 export default People;
+
+
 
