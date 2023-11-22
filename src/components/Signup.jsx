@@ -1,13 +1,14 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import loginImage from './assets/loginImage.png';
 import LOGO from './assets/LOGO.png';
-import { auth } from '../Firebase';
+// import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { db } from '../Firebase'
-import { collection, addDoc } from '@firebase/firestore'
-//import { FirebaseApp } from '../Firebase';
+import { db, auth } from '../firebaseConfig';
+import { collection, addDoc } from '@firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import PropTypes from 'prop-types'; // Import PropTypes
+
 
 const Signup = ({ setLoggedIn }) => {
   const [fullName, setFullName] = useState('');
@@ -20,71 +21,71 @@ const Signup = ({ setLoggedIn }) => {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const navigate = useNavigate();
+
   
   const handleSignup = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       
-      // Extract the user from the userCredential
-      const user = userCredential.user;
-
-       // Create a Firestore document to store user information
-      const usersCollection = collection(db, 'users'); // 'users' is the Firestore collection name
-      // Define the user data to save
-      const userData = {
-        fullName,
-        email,
-        userType,
-        contactNumber,
-        password,
-        confirmPassword,
-        agreedToTerms,
-       // Add more user data as needed
-      };
-
-      // Save user data to Firestore
-      await addDoc(usersCollection, {
-        uid: user.uid, // Optionally store the user's UID as part of the document
-        ...userData,
+  
+      // Wait for the authentication state to stabilize
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          // Create a Firestore document to store user information
+          const usersCollection = collection(db, 'users');
+          console.log(usersCollection);
+          const userData = {
+            fullName,
+            email,
+            userType,
+            contactNumber,
+            // ... other user data
+          };
+  
+          // Add the user profile to Firestore
+          const userDocRef = await addDoc(usersCollection, {
+            uid: user.uid,
+            ...userData,
+          });
+  
+          console.log('User Profile Created:', userDocRef.id);
+  
+          setLoggedIn(true);
+          navigate('/dashboard');
+  
+          // Unsubscribe the listener to avoid memory leaks
+          unsubscribe();
+        }
       });
-
-      // Log user credentials and other relevant information
-      console.log('User Signed Up:', {
-        uid: user.uid,
-        email: user.email,
-        ...userData,
-      });
-
-      setLoggedIn(true);
-
-      navigate('/dashboard');
     } catch (error) {
-      
       console.error('Signup Error:', error.message);
     }
   };
+
+
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
   };
+
   const handleCountryCodeChange = (e) => {
     setCountryCode(e.target.value);
   };
+
   const handleTermsCheckboxChange = (e) => {
     setAgreedToTerms(e.target.checked);
   };
 
   return (
-    
     <div className="login-container">
       <div className="image-container">
         <img src={loginImage} alt="Login" className="login-image" />
       </div>
       <div className="login-form">
         <img src={LOGO} alt="Logo" className="LOGO-image" />
-        <h2 >Welcome to BusYan</h2>
+        <h2>Welcome to BusYan</h2>
         <p>Create your account</p>
         <form>
-        <div>
+          <div>
             <label>User type: </label>
             <label>
               <input
@@ -104,39 +105,39 @@ const Signup = ({ setLoggedIn }) => {
               />
                Admin
             </label>
-        </div>
-            <div className="input-container">
-                <input
-                type="text"
-                placeholder="Full name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                />
-            </div>
-            <div className="input-container">
-                <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="input-container">
-                <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <div className="input-container">
-                <input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-            </div>
+          </div>
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Full name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
           <div className="input-container">
             <select
               id="signupCountryCode"
@@ -170,7 +171,7 @@ const Signup = ({ setLoggedIn }) => {
             </label>
           </div>
           <button className="signup-button" onClick={handleSignup}>
-            Continue
+            Sign Up
           </button>
         </form>
         <p className="already">Already have an account? <Link to="/">Sign In</Link></p>
@@ -178,7 +179,8 @@ const Signup = ({ setLoggedIn }) => {
     </div>
   );
 };
+Signup.propTypes = {
+  setLoggedIn: PropTypes.func, // Prop validation for setLoggedIn function
+};
 
 export default Signup;
-
-

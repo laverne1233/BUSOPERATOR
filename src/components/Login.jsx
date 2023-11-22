@@ -5,14 +5,17 @@ import '../App.css';
 import loginImage from './assets/loginImage.png';
 import googleLogin from './assets/googleLogin.png';
 import LOGO from './assets/LOGO.png';
+import PropTypes from 'prop-types';
 
 const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // For demonstration purposes, let's directly set the user as logged in
+    // Handle basic login logic, e.g., using Firebase authentication
+    // For demonstration purposes, set the user as logged in directly
     setLoggedIn(true);
     navigate('/dashboard');
   };
@@ -20,19 +23,24 @@ const Login = ({ setLoggedIn }) => {
   const handleGoogleLogin = async () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' }); // Add this line
-  
+    provider.setCustomParameters({ prompt: 'select_account' });
+
     try {
       await signInWithPopup(auth, provider);
-      setLoggedIn(true); // Set the user as logged in
-  
-      // Redirect to the dashboard or other page
+      setLoggedIn(true);
       navigate('/dashboard');
     } catch (error) {
       console.error('Google Sign-In Error:', error);
     }
   };
-  
+
+  const handleAdditionalInfoSubmit = () => {
+    // Handle the submission of additional information, e.g., saving it to Firestore
+    // Make an API call to save additionalInfo to your database
+    // Then, set the user as logged in
+    setLoggedIn(true);
+    navigate('/dashboard');
+  };
 
   return (
     <div className="login-container">
@@ -60,6 +68,16 @@ const Login = ({ setLoggedIn }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {additionalInfo ? (
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Additional Information"
+                value={additionalInfo}
+                onChange={(e) => setAdditionalInfo(e.target.value)}
+              />
+            </div>
+          ) : null}
           <div className="forgot-password">
             <button type="button">Forgot the password?</button>
           </div>
@@ -69,7 +87,7 @@ const Login = ({ setLoggedIn }) => {
         </form>
         <div className="signup">
           <p>
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <button
               type="button"
               onClick={() => {
@@ -86,9 +104,20 @@ const Login = ({ setLoggedIn }) => {
             <img src={googleLogin} alt="google" />
           </button>
         </div>
+        {additionalInfo && (
+          <div>
+            <button className="login-button" onClick={handleAdditionalInfoSubmit}>
+              Submit Additional Info
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  setLoggedIn: PropTypes.func.isRequired,
 };
 
 export default Login;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import accountVerificationImage from './assets/accountVerificationImage.png'; 
-import managePeopleImage from './assets/managePeopleImage.png'; 
-import staffStatus from './assets/staffStatus.png'; 
+import accountVerificationImage from './assets/accountVerificationImage.png';
+import managePeopleImage from './assets/managePeopleImage.png';
+import staffStatus from './assets/staffStatus.png';
 
 const People = () => {
     const [showStaffStatus, setShowStaffStatus] = useState(true); // Set to true
@@ -30,8 +30,8 @@ const People = () => {
     return (
         <div>
             <p className="bus-heading">Manage People</p>
-            <p className="bus-heading2">Verify bus driver's accounts and manage their data</p>
-            
+            <p className="bus-heading2">Verify bus driver&apos;s accounts and manage their data</p>
+
             <div className="search-bar">
                 <input type="text" placeholder="Search" />
                 <div className="search-icon">
@@ -43,7 +43,7 @@ const People = () => {
                     className={showStaffStatus ? 'active-button' : 'inactive-button'}
                     onClick={toggleStaffStatus}
                 >
-                    Staff's Status
+                    Staff&apos;s Status
                 </button>
                 <button
                     className={showManageStaff ? 'active-button' : 'inactive-button'}
@@ -59,8 +59,10 @@ const People = () => {
                 </button>
             </div>
             <div className="image-container">
-                {showStaffStatus && <img src={staffStatus} alt="Staff's Status" className="image" />}
-                {showAccountVerification && <img src={accountVerificationImage} alt="Account Verification" className="image" />}
+                {showStaffStatus && <img src={staffStatus} alt="Staff&apos;s Status" className="image" />}
+                {showAccountVerification && (
+                    <img src={accountVerificationImage} alt="Account Verification" className="image" />
+                )}
                 {showManageStaff && (
                     <div className="image-button-container">
                         <button className="add-new-bus-button">Add new staff +</button>
@@ -73,6 +75,3 @@ const People = () => {
 };
 
 export default People;
-
-
-

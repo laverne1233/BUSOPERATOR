@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 import dashboardImage from './assets/dashboardImage.png';
 
 const Dashboard = ({ isOpen }) => {
@@ -16,7 +17,9 @@ const Dashboard = ({ isOpen }) => {
     );
 };
 
+// Add PropTypes validation
+Dashboard.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+};
+
 export default Dashboard;
-
-
-

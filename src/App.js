@@ -11,8 +11,9 @@ import Job from './pages/Job.jsx';
 import Notification from './pages/Notification.jsx';
 import Profile from './pages/Profile.jsx';
 import LogOut from './pages/LogOut.jsx';
-import Login from './components/Login.jsx';
+import AboutUs from './pages/aboutUs.jsx';
 import Signup from './components/Signup.jsx';
+import Login from './components/Login.jsx';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/Applicant" element={<Applicant />} />
             <Route path="/Notification" element={<Notification />} />
             <Route path="/Profile" element={<Profile />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/LogOut" element={<LogOut />} />
           </Routes>
         </Sidebar>
